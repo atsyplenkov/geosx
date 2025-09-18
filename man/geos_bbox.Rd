@@ -18,7 +18,7 @@ For single geometries, the behavior of \code{geos_bbox} is
 identical to \link[geos:geos_centroid]{geos_envelope}.
 }
 \examples{
-x <- geos::as_geos_geometry("GEOMETRYCOLLECTION (POINT (1 2), POINT (3 4))")
+x <- geos::as_geos_geometry(c("POINT (1 2)", "POINT (3 4)"))
 geos_bbox(x)
 
 }

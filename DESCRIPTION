@@ -1,5 +1,5 @@
 Package: geosx
-Title: Vector Processing Toolbox For 'geos'
+Title: Vector Processing Toolbox For 'geos' R package
 Version: 0.0.0.9000
 Authors@R: c(person(given = "Anatoly", family = "Tsyplenkov", role = c("aut", "cre", "cph"), email = "atsyplenkov@fastmail.com", comment = c(ORCID = "0000-0003-4144-8402")))
 Description: Collection of common tools for vector geometry operations as an extension to 'geos' package.
@@ -13,4 +13,5 @@ Imports:
     geos,
     wk
 Suggests: 
-    tinytest
+    tinytest,
+    terra

@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' x <- geos::as_geos_geometry("GEOMETRYCOLLECTION (POINT (1 2), POINT (3 4))")
+#' x <- geos::as_geos_geometry(c("POINT (1 2)", "POINT (3 4)"))
 #' geos_bbox(x)
 #'
 geos_bbox <- function(geom) {
