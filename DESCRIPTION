@@ -1,8 +1,8 @@
-Package: geostools
-Title: Tools for geospatial data analysis
+Package: geosx
+Title: Vector Processing Toolbox For 'geos'
 Version: 0.0.0.9000
 Authors@R: c(person(given = "Anatoly", family = "Tsyplenkov", role = c("aut", "cre", "cph"), email = "atsyplenkov@fastmail.com", comment = c(ORCID = "0000-0003-4144-8402")))
-Description: Tools for geospatial data analysis.
+Description: Collection of common tools for vector geometry operations as an extension to 'geos' package.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -10,3 +10,5 @@ RoxygenNote: 7.3.2
 Imports: 
     geos,
     wk
+Depends: 
+    R (>= 4.1)
