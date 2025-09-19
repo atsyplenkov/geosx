@@ -14,4 +14,4 @@ Imports:
     wk
 Suggests: 
     tinytest,
-    terra
+    sf
