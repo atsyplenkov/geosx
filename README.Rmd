@@ -1,0 +1,104 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  dpi = 300,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# geosx
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/atsyplenkov/geosx/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/atsyplenkov/geosx/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+The `geosx` package provides a collection of common tools for
+vector geometry operations as an extension to
+[`geos`](https://github.com/paleolimbot/geos). It is a highly
+experimental and opinionated library, with a focus on performance, 
+simplicity and lightweightness. I originally put this package together for my
+own projects, collecting handy functions I kept reusing.
+
+> [!NOTE]
+> This package is still in development and API is subject to change.
+
+## Installation
+
+You can install the development version of geosx like so:
+
+``` r
+# install.packages("pak")
+pak::pak("atsyplenkov/geosx")
+```
+## Examples
+
+For example, one can generate a grid of polygons over some points and
+find the points within the central grid cell, or find standalone points
+(those which stand within a user-defined distance from other points):
+```{r example}
+library(geos)
+library(geosx)
+
+# Generate some random points
+pts <- wk::xy(
+  x = runif(10000, 0, 100000),
+  y = runif(10000, 0, 100000)
+) |>
+  geos::as_geos_geometry()
+
+# Generate a grid of polygons over the points
+grid <- geos_make_grid(pts, 5, 5)
+
+# Find the points within the central grid cell
+pts_within <- geos_str_intersection(pts, grid[13])
+
+# Or find standalone points (those which stand within `maxdist`)
+pts_standalone <- geos_standalone_points(pts, 1000)
+
+# Plot the points and the grid
+plot(pts, col = "grey")
+plot(pts_within, add = TRUE, col = "dodgerblue", pch = 19)
+plot(pts_standalone, add = TRUE, col = "forestgreen", pch = 19)
+plot(grid[13], add = TRUE, border = "red", lwd = 3)
+```
+
+The `geos_str_intersection` function acts similarly to the
+`geos::geos_intersect` (and `sf::st_intersection`), but is
+slightly faster for multiple polygons. However, one may not find
+significant speed gain in single polygon cases.
+
+```{r benchmark1}
+library(bench)
+library(sf)
+
+pts_sf <- sf::st_as_sfc(pts)
+grid_sf <- sf::st_as_sfc(grid)
+
+# Single polygon
+bench::mark(
+  geosx = geos_str_intersection(pts, grid[13]),
+  geos = pts[geos::geos_intersects(pts, grid[13])],
+  sf = sf::st_intersects(pts_sf, grid_sf[13]),
+  iterations = 30L,
+  check = FALSE
+)
+
+# Multiple polygons
+bench::mark(
+  geosx = geos_str_intersection(pts, grid[13:15]),
+  geos = pts[geos::geos_intersects(pts, geos::geos_make_collection(grid[13:15]))],
+  sf = sf::st_intersects(pts_sf, grid_sf[13:15]),
+  iterations = 30L,
+  check = FALSE
+)
+```
+
+
