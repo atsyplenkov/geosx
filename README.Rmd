@@ -34,7 +34,7 @@ own projects, collecting handy functions I kept reusing.
 
 You can install the development version of geosx like so:
 
-``` r
+```r
 # install.packages("pak")
 pak::pak("atsyplenkov/geosx")
 ```

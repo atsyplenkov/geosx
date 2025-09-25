@@ -15,8 +15,8 @@ experimental and opinionated library, with a focus on performance,
 simplicity and lightweightness. I originally put this package together
 for my own projects, collecting handy functions I kept reusing.
 
-> \[!NOTE\] This package is still in development and API is subject to
-> change.
+> [!NOTE]
+> This package is still in development and API is subject to change.
 
 ## Installation
 
@@ -86,9 +86,9 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.23ms   1.54ms     624.      175KB      0  
-#> 2 geos        533.1µs  648.4µs    1561.      247KB      0  
-#> 3 sf          23.59ms  26.68ms      37.4     880KB     56.1
+#> 1 geosx        1.18ms   1.29ms     766.      177KB      0  
+#> 2 geos        478.6µs  505.2µs    1915.      247KB      0  
+#> 3 sf          21.77ms  22.93ms      43.4     880KB     65.0
 
 # Multiple polygons
 bench::mark(
@@ -101,7 +101,7 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.37ms   1.55ms     622.      220KB     0   
-#> 2 geos        14.45ms  15.38ms      63.5     285KB     2.19
-#> 3 sf          22.34ms  24.67ms      39.8     435KB    79.5
+#> 1 geosx        1.37ms   1.57ms     609.      220KB     0   
+#> 2 geos        14.46ms  14.87ms      66.5     285KB     2.29
+#> 3 sf          22.18ms  25.39ms      39.3     435KB    78.5
 ```
