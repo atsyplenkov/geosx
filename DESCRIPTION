@@ -10,6 +10,7 @@ RoxygenNote: 7.3.2
 Depends: 
     R (>= 4.1)
 Imports: 
+    checkmate,
     geos,
     wk
 Suggests: 

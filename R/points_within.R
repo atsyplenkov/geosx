@@ -21,6 +21,10 @@
 #' solo_pts <- geos_standalone_points(pts_geom, maxdist)
 #'
 geos_standalone_points <- function(pts, maxdist) {
+  checkmate::assert_class(pts, "geos_geometry")
+  checkmate::assert_number(maxdist, lower = 0)
+  checkmate::assert_true(all(geos::geos_type(pts) == "point"))
+
   pts_buffer <- geos::geos_buffer(pts, maxdist)
   pts_str <- geos::geos_strtree(pts)
   pts_ids <- geos::geos_intersects_matrix(pts_buffer, pts_str) |>
