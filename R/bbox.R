@@ -38,6 +38,9 @@ geos_bbox <- function(geom) {
 #'
 #' grid <- geos_make_grid(pts_geom)
 geos_make_grid <- function(geom, nx = 5, ny = 5) {
+  checkmate::assert_number(nx, lower = 1)
+  checkmate::assert_number(ny, lower = 1)
+
   geom |>
     wk::wk_bbox() |>
     wk::grd(nx, ny) |>

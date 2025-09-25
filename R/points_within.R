@@ -21,9 +21,11 @@
 #' solo_pts <- geos_standalone_points(pts_geom, maxdist)
 #'
 geos_standalone_points <- function(pts, maxdist) {
-  checkmate::assert_class(pts, "geos_geometry")
+  checkmate::assert_multi_class(pts, c("geos_geometry", "wk_xy"))
   checkmate::assert_number(maxdist, lower = 0)
-  checkmate::assert_true(all(geos::geos_type(pts) == "point"))
+  checkmate::assert_true(
+    all(geos::geos_type(pts) %in% c("point", "multipoint"))
+  )
 
   pts_buffer <- geos::geos_buffer(pts, maxdist)
   pts_str <- geos::geos_strtree(pts)
