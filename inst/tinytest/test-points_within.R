@@ -7,8 +7,8 @@ if (requireNamespace("tinytest", quietly = TRUE)) {
 # geos_standalone_points -------------------------------------------------
 maxdist <- 500
 pts <- data.frame(
-  x = runif(5000, 0, 100000),
-  y = runif(5000, 0, 100000)
+  x = runif(1000, 0, 10000),
+  y = runif(1000, 0, 10000)
 )
 pts_geom <- geos::as_geos_geometry(
   wk::xy(pts$x, pts$y)
