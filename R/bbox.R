@@ -16,3 +16,30 @@
 geos_bbox <- function(geom) {
   geos::as_geos_geometry(wk::wk_bbox(geom))
 }
+
+#' Create a grid of polygons over a geometry's bounding box
+#'
+#' @param geom  A [GEOS geometry vector][geos::as_geos_geometry]
+#' @param nx Number of grid cells in x direction.
+#' @param ny Number of grid cells in y direction.
+#'
+#' @return A polygon [GEOS geometry vector][geos::as_geos_geometry]
+#'
+#' @export
+#'
+#' @examples
+#' pts <- data.frame(
+#'   x = runif(500, 0, 100000),
+#'   y = runif(500, 0, 100000)
+#' )
+#' pts_geom <- geos::as_geos_geometry(
+#'   wk::xy(pts$x, pts$y)
+#' )
+#'
+#' grid <- geos_make_grid(pts_geom)
+geos_make_grid <- function(geom, nx = 5, ny = 5) {
+  geom |>
+    wk::wk_bbox() |>
+    wk::grd(nx, ny) |>
+    geos::as_geos_geometry()
+}
