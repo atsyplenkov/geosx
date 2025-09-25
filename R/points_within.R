@@ -1,6 +1,6 @@
 #' Find standalone points with no neighbors within a distance
 #'
-#' See: \url{https://lbusettspatialr.blogspot.com/2018/02/speeding-up-spatial-analyses-by.html}
+#' Inspired by: \url{https://lbusettspatialr.blogspot.com/2018/02/speeding-up-spatial-analyses-by.html}
 #'
 #' @param pts  [GEOS geometry vector][geos::as_geos_geometry] of points.
 #' @param maxdist Maximum distance to consider neighbors.

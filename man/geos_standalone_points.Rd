@@ -15,7 +15,7 @@ geos_standalone_points(pts, maxdist)
 \link[geos:as_geos_geometry]{GEOS geometry vector}
 }
 \description{
-See: \url{https://lbusettspatialr.blogspot.com/2018/02/speeding-up-spatial-analyses-by.html}
+Inspired by: \url{https://lbusettspatialr.blogspot.com/2018/02/speeding-up-spatial-analyses-by.html}
 }
 \examples{
 maxdist <- 500

@@ -20,8 +20,6 @@ A polygon \link[geos:as_geos_geometry]{GEOS geometry vector}
 Create a grid of polygons over a geometry's bounding box
 }
 \examples{
-library(geos)
-
 pts <- data.frame(
   x = runif(500, 0, 100000),
   y = runif(500, 0, 100000)
@@ -31,8 +29,4 @@ pts_geom <- geos::as_geos_geometry(
 )
 
 grid <- geos_make_grid(pts_geom)
-
-plot(grid)
-plot(pts_geom, add = TRUE)
-
 }
