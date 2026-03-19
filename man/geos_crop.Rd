@@ -5,20 +5,21 @@
 \alias{geos_clip}
 \title{Clip geometries to a polygon}
 \usage{
-geos_crop(geom, polygon)
+geos_crop(input, overlay)
 
-geos_clip(geom, polygon)
+geos_clip(input, overlay)
 }
 \arguments{
-\item{geom}{A \link[geos:as_geos_geometry]{GEOS geometry vector}}
+\item{input}{A \link[geos:as_geos_geometry]{GEOS geometry vector}}
 
-\item{polygon}{A polygon \link[geos:as_geos_geometry]{GEOS geometry vector}}
+\item{overlay}{A polygon \link[geos:as_geos_geometry]{GEOS geometry vector}}
 }
 \value{
 A \link[geos:as_geos_geometry]{GEOS geometry vector}
 }
 \description{
-This algorithm clips a vector layer using the features of a polygon layer.
+This algorithm clips a vector \code{input} layer using the features of a polygon
+\code{overlay} layer.
 Only the parts of the features in the input geom that fall within the
 polygons of the Overlay layer will be added to the resulting layer.
 }
