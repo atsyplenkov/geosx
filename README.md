@@ -33,7 +33,7 @@ experimental and opinionated library, with a focus on performance,
 simplicity and lightweightness. I originally put this package together
 for my own projects, collecting handy functions I kept reusing.
 
-> [!note] This package is still in development and API is subject to
+> [!NOTE] This package is still in development and API is subject to
 > change.
 
 ## Installation
