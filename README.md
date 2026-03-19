@@ -3,22 +3,25 @@
 
 <!-- badges: start -->
 
-<p align="center">
+<center>
 
 <h1>
 
 <code>geosx</code>
 </h1>
 
-    <a href="https://github.com/atsyplenkov/geosx/releases">
-        <img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a>
-    <!-- <a href="https://cran.r-project.org/package=geosx">
-        <img src="https://img.shields.io/cran/v/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=R&logoColor=white"></a> -->
-    <a href="https://app.codecov.io/gh/atsyplenkov/geosx">
-        <img src="https://img.shields.io/codecov/c/gh/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=256bc0&logo=Codecov&logoColor=white"></a>
-    <a href="https://github.com/atsyplenkov/geosx/actions/workflows/check-r-pkg.yaml">
-        <img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/geosx/check-r-pkg.yaml?style=flat&labelColor=1C2C2E&color=256bc0&logo=GitHub%20Actions&logoColor=white"></a>
+</center>
 
+<p align="center">
+
+<a href="https://github.com/atsyplenkov/geosx/releases">
+<img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a>
+<!-- <a href="https://cran.r-project.org/package=geosx">
+        <img src="https://img.shields.io/cran/v/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=R&logoColor=white"></a> -->
+<a href="https://app.codecov.io/gh/atsyplenkov/geosx">
+<img src="https://img.shields.io/codecov/c/gh/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=256bc0&logo=Codecov&logoColor=white"></a>
+<a href="https://github.com/atsyplenkov/geosx/actions/workflows/check-r-pkg.yaml">
+<img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/geosx/check-r-pkg.yaml?style=flat&labelColor=1C2C2E&color=256bc0&logo=GitHub%20Actions&logoColor=white"></a>
 </p>
 
 <!-- badges: end -->
@@ -30,7 +33,7 @@ experimental and opinionated library, with a focus on performance,
 simplicity and lightweightness. I originally put this package together
 for my own projects, collecting handy functions I kept reusing.
 
-> [!NOTE] This package is still in development and API is subject to
+> [!note] This package is still in development and API is subject to
 > change.
 
 ## Installation
@@ -102,9 +105,9 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.62ms   1.94ms     511.      177KB     17.6
-#> 2 geos       746.68µs 812.01µs    1190.      247KB      0  
-#> 3 sf          38.23ms  40.44ms      24.3     880KB     12.1
+#> 1 geosx        1.61ms   1.92ms     489.      176KB     16.9
+#> 2 geos       741.46µs 753.74µs    1226.      247KB      0  
+#> 3 sf          38.72ms  46.28ms      21.4     880KB     10.7
 
 # Multiple polygons
 bench::mark(
@@ -120,9 +123,9 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.75ms   1.97ms     500.      221KB      0  
-#> 2 geos        23.75ms  30.04ms      31.4     286KB      0  
-#> 3 sf          39.21ms  47.09ms      21.0     435KB     14.0
+#> 1 geosx        1.91ms   2.34ms     386.      219KB      0  
+#> 2 geos        22.91ms  28.15ms      36.3     285KB      0  
+#> 3 sf          39.58ms  43.72ms      23.0     435KB     15.3
 ```
 
 And my favourite tool is the `geos_clip` function, which clips a
@@ -138,6 +141,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        2.72ms   2.89ms     339.      209KB     0   
-#> 2 sf          15.97ms  20.52ms      48.3     169KB     5.37
+#> 1 geosx        2.35ms   2.54ms     391.      207KB     0   
+#> 2 sf          15.81ms  17.13ms      57.4     166KB     6.38
 ```

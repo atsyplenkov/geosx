@@ -17,9 +17,11 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
+<center>
+<h1><code>geosx</code></h1>
+</center>
 
 <p align="center">
-<h1><code>geosx</code></h1>
     <a href="https://github.com/atsyplenkov/geosx/releases">
         <img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a>
     <!-- <a href="https://cran.r-project.org/package=geosx">
