@@ -2,9 +2,12 @@
 % Please edit documentation in R/crop.R
 \name{geos_crop}
 \alias{geos_crop}
-\title{Crop geometries to a polygon}
+\alias{geos_clip}
+\title{Clip geometries to a polygon}
 \usage{
 geos_crop(geom, polygon)
+
+geos_clip(geom, polygon)
 }
 \arguments{
 \item{geom}{A \link[geos:as_geos_geometry]{GEOS geometry vector}}
@@ -15,5 +18,7 @@ geos_crop(geom, polygon)
 A \link[geos:as_geos_geometry]{GEOS geometry vector}
 }
 \description{
-Crops a ... using a spatial index
+This algorithm clips a vector layer using the features of a polygon layer.
+Only the parts of the features in the input geom that fall within the
+polygons of the Overlay layer will be added to the resulting layer.
 }
