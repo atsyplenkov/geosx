@@ -14,10 +14,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-# geosx
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/atsyplenkov/geosx/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/atsyplenkov/geosx/actions/workflows/R-CMD-check.yaml)
+
+
+<p align="center">
+<h1><code>geosx</code></h1>
+    <a href="https://github.com/atsyplenkov/geosx/releases">
+        <img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a>
+    <!-- <a href="https://cran.r-project.org/package=geosx">
+        <img src="https://img.shields.io/cran/v/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=R&logoColor=white"></a> -->
+    <a href="https://app.codecov.io/gh/atsyplenkov/geosx">
+        <img src="https://img.shields.io/codecov/c/gh/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=256bc0&logo=Codecov&logoColor=white"></a>
+    <a href="https://github.com/atsyplenkov/geosx/actions/workflows/check-r-pkg.yaml">
+        <img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/geosx/check-r-pkg.yaml?style=flat&labelColor=1C2C2E&color=256bc0&logo=GitHub%20Actions&logoColor=white"></a>
+</p>
 <!-- badges: end -->
 
 The `geosx` package provides a collection of common tools for
@@ -73,7 +84,8 @@ plot(grid[13], add = TRUE, border = "red", lwd = 3)
 The `geos_str_intersection` function acts similarly to the
 `geos::geos_intersect` (and `sf::st_intersection`), but is
 slightly faster for multiple polygons. However, one may not find
-significant speed gain in single polygon cases.
+significant speed gain in single polygon cases due to additional type checking
+going under the hood in `geosx`.
 
 ```{r benchmark1}
 library(bench)
@@ -94,11 +106,23 @@ bench::mark(
 # Multiple polygons
 bench::mark(
   geosx = geos_str_intersection(pts, grid[13:15]),
-  geos = pts[geos::geos_intersects(pts, geos::geos_make_collection(grid[13:15]))],
+  geos = pts[geos::geos_intersects(
+    pts,
+    geos::geos_make_collection(grid[13:15])
+  )],
   sf = sf::st_intersects(pts_sf, grid_sf[13:15]),
   iterations = 30L,
   check = FALSE
 )
 ```
 
+And my favourite tool is the `geos_clip` function, which clips a geometry to a polygon. 
 
+```{r benchmark2}
+bench::mark(
+  geosx = geos_clip(pts, grid[13]),
+  sf = sf::st_intersection(pts_sf, grid_sf[13]),
+  iterations = 30L,
+  check = FALSE
+)
+```

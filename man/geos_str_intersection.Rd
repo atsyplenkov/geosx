@@ -4,12 +4,12 @@
 \alias{geos_str_intersection}
 \title{Find geometries intersecting a polygon using a spatial index}
 \usage{
-geos_str_intersection(geom, polygon)
+geos_str_intersection(input, overlay)
 }
 \arguments{
-\item{geom}{A \link[geos:as_geos_geometry]{GEOS geometry vector}}
+\item{input}{A \link[geos:as_geos_geometry]{GEOS geometry vector}}
 
-\item{polygon}{A polygon \link[geos:as_geos_geometry]{GEOS geometry vector}}
+\item{overlay}{A polygon \link[geos:as_geos_geometry]{GEOS geometry vector}}
 }
 \value{
 A \link[geos:as_geos_geometry]{GEOS geometry vector}

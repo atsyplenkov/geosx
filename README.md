@@ -1,11 +1,26 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# geosx
-
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/atsyplenkov/geosx/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/atsyplenkov/geosx/actions/workflows/R-CMD-check.yaml)
+<p align="center">
+
+<h1>
+
+<code>geosx</code>
+</h1>
+
+    <a href="https://github.com/atsyplenkov/geosx/releases">
+        <img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a>
+    <!-- <a href="https://cran.r-project.org/package=geosx">
+        <img src="https://img.shields.io/cran/v/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=R&logoColor=white"></a> -->
+    <a href="https://app.codecov.io/gh/atsyplenkov/geosx">
+        <img src="https://img.shields.io/codecov/c/gh/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=256bc0&logo=Codecov&logoColor=white"></a>
+    <a href="https://github.com/atsyplenkov/geosx/actions/workflows/check-r-pkg.yaml">
+        <img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/geosx/check-r-pkg.yaml?style=flat&labelColor=1C2C2E&color=256bc0&logo=GitHub%20Actions&logoColor=white"></a>
+
+</p>
+
 <!-- badges: end -->
 
 The `geosx` package provides a collection of common tools for vector
@@ -15,8 +30,8 @@ experimental and opinionated library, with a focus on performance,
 simplicity and lightweightness. I originally put this package together
 for my own projects, collecting handy functions I kept reusing.
 
-> [!NOTE]
-> This package is still in development and API is subject to change.
+> [!NOTE] This package is still in development and API is subject to
+> change.
 
 ## Installation
 
@@ -60,17 +75,18 @@ plot(pts_standalone, add = TRUE, col = "forestgreen", pch = 19)
 plot(grid[13], add = TRUE, border = "red", lwd = 3)
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-example-1.png" alt="" width="100%" />
 
 The `geos_str_intersection` function acts similarly to the
 `geos::geos_intersect` (and `sf::st_intersection`), but is slightly
 faster for multiple polygons. However, one may not find significant
-speed gain in single polygon cases.
+speed gain in single polygon cases due to additional type checking going
+under the hood in `geosx`.
 
 ``` r
 library(bench)
 library(sf)
-#> Linking to GEOS 3.13.1, GDAL 3.10.2, PROJ 9.5.1; sf_use_s2() is TRUE
+#> Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2() is TRUE
 
 pts_sf <- sf::st_as_sfc(pts)
 grid_sf <- sf::st_as_sfc(grid)
@@ -86,14 +102,17 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.18ms   1.29ms     766.      177KB      0  
-#> 2 geos        478.6µs  505.2µs    1915.      247KB      0  
-#> 3 sf          21.77ms  22.93ms      43.4     880KB     65.0
+#> 1 geosx        1.62ms   1.94ms     511.      177KB     17.6
+#> 2 geos       746.68µs 812.01µs    1190.      247KB      0  
+#> 3 sf          38.23ms  40.44ms      24.3     880KB     12.1
 
 # Multiple polygons
 bench::mark(
   geosx = geos_str_intersection(pts, grid[13:15]),
-  geos = pts[geos::geos_intersects(pts, geos::geos_make_collection(grid[13:15]))],
+  geos = pts[geos::geos_intersects(
+    pts,
+    geos::geos_make_collection(grid[13:15])
+  )],
   sf = sf::st_intersects(pts_sf, grid_sf[13:15]),
   iterations = 30L,
   check = FALSE
@@ -101,7 +120,24 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.37ms   1.57ms     609.      220KB     0   
-#> 2 geos        14.46ms  14.87ms      66.5     285KB     2.29
-#> 3 sf          22.18ms  25.39ms      39.3     435KB    78.5
+#> 1 geosx        1.75ms   1.97ms     500.      221KB      0  
+#> 2 geos        23.75ms  30.04ms      31.4     286KB      0  
+#> 3 sf          39.21ms  47.09ms      21.0     435KB     14.0
+```
+
+And my favourite tool is the `geos_clip` function, which clips a
+geometry to a polygon.
+
+``` r
+bench::mark(
+  geosx = geos_clip(pts, grid[13]),
+  sf = sf::st_intersection(pts_sf, grid_sf[13]),
+  iterations = 30L,
+  check = FALSE
+)
+#> # A tibble: 2 × 6
+#>   expression      min   median `itr/sec` mem_alloc `gc/sec`
+#>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
+#> 1 geosx        2.72ms   2.89ms     339.      209KB     0   
+#> 2 sf          15.97ms  20.52ms      48.3     169KB     5.37
 ```
