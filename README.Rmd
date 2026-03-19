@@ -17,9 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-<center>
-<h1><code>geosx</code></h1>
-</center>
+<h1 align=center><code>geosx</code></h1>
 
 <p align="center">
     <a href="https://github.com/atsyplenkov/geosx/releases">
@@ -40,7 +38,7 @@ experimental and opinionated library, with a focus on performance,
 simplicity and lightweightness. I originally put this package together for my
 own projects, collecting handy functions I kept reusing.
 
-> [!NOTE]
+> [!note]
 > This package is still in development and API is subject to change.
 
 ## Installation

@@ -3,14 +3,7 @@
 
 <!-- badges: start -->
 
-<center>
-
-<h1>
-
-<code>geosx</code>
-</h1>
-
-</center>
+<h1 align="center"><code>geosx</code></h1>
 
 <p align="center">
 
@@ -33,8 +26,8 @@ experimental and opinionated library, with a focus on performance,
 simplicity and lightweightness. I originally put this package together
 for my own projects, collecting handy functions I kept reusing.
 
-> [!NOTE] This package is still in development and API is subject to
-> change.
+> [!note] 
+> This package is still in development and API is subject to change.
 
 ## Installation
 
@@ -105,9 +98,9 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.61ms   1.92ms     489.      176KB     16.9
-#> 2 geos       741.46µs 753.74µs    1226.      247KB      0  
-#> 3 sf          38.72ms  46.28ms      21.4     880KB     10.7
+#> 1 geosx        1.67ms   1.86ms     511.      175KB     17.6
+#> 2 geos       731.43µs 781.59µs    1220.      247KB      0  
+#> 3 sf          39.03ms  42.46ms      21.9     880KB     11.0
 
 # Multiple polygons
 bench::mark(
@@ -123,9 +116,9 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.91ms   2.34ms     386.      219KB      0  
-#> 2 geos        22.91ms  28.15ms      36.3     285KB      0  
-#> 3 sf          39.58ms  43.72ms      23.0     435KB     15.3
+#> 1 geosx        1.73ms      2ms     491.      217KB      0  
+#> 2 geos        22.93ms   27.2ms      36.4     284KB      0  
+#> 3 sf          44.06ms     50ms      19.4     435KB     12.9
 ```
 
 And my favourite tool is the `geos_clip` function, which clips a
@@ -141,6 +134,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        2.35ms   2.54ms     391.      207KB     0   
-#> 2 sf          15.81ms  17.13ms      57.4     166KB     6.38
+#> 1 geosx        2.31ms    2.5ms     390.      205KB     0   
+#> 2 sf          16.04ms   17.2ms      57.4     163KB     6.38
 ```
