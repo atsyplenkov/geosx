@@ -17,8 +17,9 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-<h1><code>geosx</code></h1>
+
 <p align="center">
+<h1><code>geosx</code></h1>
     <a href="https://github.com/atsyplenkov/geosx/releases">
         <img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a>
     <!-- <a href="https://cran.r-project.org/package=geosx">
@@ -105,7 +106,10 @@ bench::mark(
 # Multiple polygons
 bench::mark(
   geosx = geos_str_intersection(pts, grid[13:15]),
-  geos = pts[geos::geos_intersects(pts, geos::geos_make_collection(grid[13:15]))],
+  geos = pts[geos::geos_intersects(
+    pts,
+    geos::geos_make_collection(grid[13:15])
+  )],
   sf = sf::st_intersects(pts_sf, grid_sf[13:15]),
   iterations = 30L,
   check = FALSE

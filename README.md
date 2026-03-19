@@ -1,19 +1,26 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
+
+<p align="center">
+
 <h1>
+
 <code>geosx</code>
 </h1>
-<p align="center">
-<a href="https://github.com/atsyplenkov/geosx/releases">
-<img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a>
-<!-- <a href="https://cran.r-project.org/package=geosx">
+
+    <a href="https://github.com/atsyplenkov/geosx/releases">
+        <img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a>
+    <!-- <a href="https://cran.r-project.org/package=geosx">
         <img src="https://img.shields.io/cran/v/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=R&logoColor=white"></a> -->
-<a href="https://app.codecov.io/gh/atsyplenkov/geosx">
-<img src="https://img.shields.io/codecov/c/gh/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=256bc0&logo=Codecov&logoColor=white"></a>
-<a href="https://github.com/atsyplenkov/geosx/actions/workflows/check-r-pkg.yaml">
-<img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/geosx/check-r-pkg.yaml?style=flat&labelColor=1C2C2E&color=256bc0&logo=GitHub%20Actions&logoColor=white"></a>
+    <a href="https://app.codecov.io/gh/atsyplenkov/geosx">
+        <img src="https://img.shields.io/codecov/c/gh/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=256bc0&logo=Codecov&logoColor=white"></a>
+    <a href="https://github.com/atsyplenkov/geosx/actions/workflows/check-r-pkg.yaml">
+        <img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/geosx/check-r-pkg.yaml?style=flat&labelColor=1C2C2E&color=256bc0&logo=GitHub%20Actions&logoColor=white"></a>
+
 </p>
+
 <!-- badges: end -->
 
 The `geosx` package provides a collection of common tools for vector
@@ -23,7 +30,7 @@ experimental and opinionated library, with a focus on performance,
 simplicity and lightweightness. I originally put this package together
 for my own projects, collecting handy functions I kept reusing.
 
-> \[!NOTE\] This package is still in development and API is subject to
+> [!NOTE] This package is still in development and API is subject to
 > change.
 
 ## Installation
@@ -95,14 +102,17 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.62ms   1.99ms     496.      176KB    17.1 
-#> 2 geos        779.7µs 894.79µs    1065.      247KB     0   
-#> 3 sf          47.42ms  59.91ms      16.7     880KB     8.37
+#> 1 geosx        1.62ms   1.94ms     511.      177KB     17.6
+#> 2 geos       746.68µs 812.01µs    1190.      247KB      0  
+#> 3 sf          38.23ms  40.44ms      24.3     880KB     12.1
 
 # Multiple polygons
 bench::mark(
   geosx = geos_str_intersection(pts, grid[13:15]),
-  geos = pts[geos::geos_intersects(pts, geos::geos_make_collection(grid[13:15]))],
+  geos = pts[geos::geos_intersects(
+    pts,
+    geos::geos_make_collection(grid[13:15])
+  )],
   sf = sf::st_intersects(pts_sf, grid_sf[13:15]),
   iterations = 30L,
   check = FALSE
@@ -110,9 +120,9 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        2.03ms   3.14ms     316.      218KB      0  
-#> 2 geos        27.09ms  31.35ms      29.8     285KB      0  
-#> 3 sf          45.53ms  63.41ms      16.7     435KB     11.1
+#> 1 geosx        1.75ms   1.97ms     500.      221KB      0  
+#> 2 geos        23.75ms  30.04ms      31.4     286KB      0  
+#> 3 sf          39.21ms  47.09ms      21.0     435KB     14.0
 ```
 
 And my favourite tool is the `geos_clip` function, which clips a
@@ -128,6 +138,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        2.34ms   2.96ms     325.      207KB     0   
-#> 2 sf          17.98ms  20.81ms      47.8     167KB     5.31
+#> 1 geosx        2.72ms   2.89ms     339.      209KB     0   
+#> 2 sf          15.97ms  20.52ms      48.3     169KB     5.37
 ```
