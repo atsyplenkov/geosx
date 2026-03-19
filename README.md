@@ -7,14 +7,13 @@
 
 <p align="center">
 
-<a href="https://github.com/atsyplenkov/geosx/releases">
-<img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a>
+<!-- <a href="https://github.com/atsyplenkov/geosx/releases"><img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a> -->
+
 <!-- <a href="https://cran.r-project.org/package=geosx">
         <img src="https://img.shields.io/cran/v/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=R&logoColor=white"></a> -->
-<a href="https://app.codecov.io/gh/atsyplenkov/geosx">
-<img src="https://img.shields.io/codecov/c/gh/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=256bc0&logo=Codecov&logoColor=white"></a>
-<a href="https://github.com/atsyplenkov/geosx/actions/workflows/check-r-pkg.yaml">
-<img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/geosx/check-r-pkg.yaml?style=flat&labelColor=1C2C2E&color=256bc0&logo=GitHub%20Actions&logoColor=white"></a>
+
+<a href="https://app.codecov.io/gh/atsyplenkov/geosx"><img src="https://img.shields.io/codecov/c/gh/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=256bc0&logo=Codecov&logoColor=white"></a>
+<a href="https://github.com/atsyplenkov/geosx/actions/workflows/R-CMD-check.yaml"><img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/geosx/R-CMD-check.yaml?style=flat&labelColor=1C2C2E&color=256bc0&logo=GitHub%20Actions&logoColor=white"></a>
 </p>
 
 <!-- badges: end -->
@@ -98,9 +97,9 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.67ms   1.86ms     511.      175KB     17.6
-#> 2 geos       731.43µs 781.59µs    1220.      247KB      0  
-#> 3 sf          39.03ms  42.46ms      21.9     880KB     11.0
+#> 1 geosx        1.67ms   2.27ms     431.      175KB     14.9
+#> 2 geos       733.22µs 829.89µs    1172.      247KB      0  
+#> 3 sf          39.67ms  46.34ms      21.9     880KB     10.9
 
 # Multiple polygons
 bench::mark(
@@ -116,9 +115,9 @@ bench::mark(
 #> # A tibble: 3 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        1.73ms      2ms     491.      217KB      0  
-#> 2 geos        22.93ms   27.2ms      36.4     284KB      0  
-#> 3 sf          44.06ms     50ms      19.4     435KB     12.9
+#> 1 geosx        1.75ms   1.96ms     498.      219KB      0  
+#> 2 geos        22.98ms  28.94ms      30.0     285KB      0  
+#> 3 sf          38.82ms  42.08ms      22.7     435KB     15.1
 ```
 
 And my favourite tool is the `geos_clip` function, which clips a
@@ -134,6 +133,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 geosx        2.31ms    2.5ms     390.      205KB     0   
-#> 2 sf          16.04ms   17.2ms      57.4     163KB     6.38
+#> 1 geosx        2.78ms   3.71ms     268.      205KB     0   
+#> 2 sf          17.67ms  23.73ms      42.5     164KB     4.72
 ```

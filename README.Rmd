@@ -20,14 +20,11 @@ knitr::opts_chunk$set(
 <h1 align=center><code>geosx</code></h1>
 
 <p align="center">
-    <a href="https://github.com/atsyplenkov/geosx/releases">
-        <img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a>
+    <!-- <a href="https://github.com/atsyplenkov/geosx/releases"><img src="https://img.shields.io/github/v/release/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=GitHub&logoColor=white"></a> -->
     <!-- <a href="https://cran.r-project.org/package=geosx">
         <img src="https://img.shields.io/cran/v/geosx?style=flat&labelColor=1C2C2E&color=198ce7&logo=R&logoColor=white"></a> -->
-    <a href="https://app.codecov.io/gh/atsyplenkov/geosx">
-        <img src="https://img.shields.io/codecov/c/gh/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=256bc0&logo=Codecov&logoColor=white"></a>
-    <a href="https://github.com/atsyplenkov/geosx/actions/workflows/check-r-pkg.yaml">
-        <img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/geosx/check-r-pkg.yaml?style=flat&labelColor=1C2C2E&color=256bc0&logo=GitHub%20Actions&logoColor=white"></a>
+    <a href="https://app.codecov.io/gh/atsyplenkov/geosx"><img src="https://img.shields.io/codecov/c/gh/atsyplenkov/geosx?style=flat&labelColor=1C2C2E&color=256bc0&logo=Codecov&logoColor=white"></a>
+    <a href="https://github.com/atsyplenkov/geosx/actions/workflows/R-CMD-check.yaml"><img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/geosx/R-CMD-check.yaml?style=flat&labelColor=1C2C2E&color=256bc0&logo=GitHub%20Actions&logoColor=white"></a>
 </p>
 <!-- badges: end -->
 
