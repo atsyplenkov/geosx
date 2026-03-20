@@ -167,9 +167,7 @@ sample_coords_line <- function(
   }
 
   if (closed) {
-    if (abs(d[length(d)] - part_length) <= tol) {
-      d <- d[-length(d)]
-    }
+    d <- d[d < (end - tol)]
   } else if (abs(d[length(d)] - end) <= tol) {
     d[length(d)] <- end
   }

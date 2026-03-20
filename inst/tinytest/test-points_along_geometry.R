@@ -33,6 +33,11 @@ expect_identical(
   geos::geos_write_wkt(out),
   "MULTIPOINT (0 0)"
 )
+out <- geos_points_along_geometry(ring, distance = 1, end_offset = 1)
+expect_identical(
+  geos::geos_write_wkt(out),
+  "MULTIPOINT (0 0, 1 0, 1 1)"
+)
 
 # multipart reset and ordering -------------------------------------------
 out <- geos_points_along_geometry(
