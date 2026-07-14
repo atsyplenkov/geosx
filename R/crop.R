@@ -13,14 +13,11 @@
 geos_crop <- function(input, overlay) {
   checkmate::assert_multi_class(input, c("geos_geometry", "wk_xy"))
   checkmate::assert_class(overlay, "geos_geometry")
-  checkmate::assert_true(
-    all(geos::geos_type(overlay) %in% c("polygon", "multipolygon"))
-  )
+  checkmate::assert_true(all(
+    geos::geos_type(overlay) %in% c("polygon", "multipolygon")
+  ))
 
-  geos::geos_intersection(
-    geos_str_intersection(input, overlay),
-    overlay
-  )
+  geos::geos_intersection(geos_str_intersection(input, overlay), overlay)
 }
 
 #' @rdname geos_crop

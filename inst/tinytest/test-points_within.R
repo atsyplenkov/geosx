@@ -6,21 +6,14 @@ if (requireNamespace("tinytest", quietly = TRUE)) {
 
 # geos_standalone_points -------------------------------------------------
 maxdist <- 500
-pts <- data.frame(
-  x = runif(1000, 0, 10000),
-  y = runif(1000, 0, 10000)
-)
-pts_geom <- geos::as_geos_geometry(
-  wk::xy(pts$x, pts$y)
-)
+pts <- data.frame(x = runif(1000, 0, 10000), y = runif(1000, 0, 10000))
+pts_geom <- geos::as_geos_geometry(wk::xy(pts$x, pts$y))
 
 new <- geos_standalone_points(pts_geom, maxdist)
 gg <- vector(length = length(new))
 
 for (i in seq_along(new)) {
-  gg[i] <-
-    geos::geos_is_within_distance(new[-i], new[i], maxdist) |>
-    any()
+  gg[i] <- geos::geos_is_within_distance(new[-i], new[i], maxdist) |> any()
 }
 
 expect_false(any(gg))

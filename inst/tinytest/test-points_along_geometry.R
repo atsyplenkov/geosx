@@ -11,10 +11,7 @@ out <- geos_points_along_geometry(
   start_offset = 1,
   end_offset = 1
 )
-expect_identical(
-  geos::geos_write_wkt(out),
-  "MULTIPOINT (1 0, 4 0, 7 0)"
-)
+expect_identical(geos::geos_write_wkt(out), "MULTIPOINT (1 0, 4 0, 7 0)")
 
 # endpoint floating tolerance --------------------------------------------
 out <- geos_points_along_geometry(
@@ -29,15 +26,9 @@ expect_equal(
 # closed ring no duplicate closure ---------------------------------------
 ring <- geos::as_geos_geometry("LINEARRING (0 0, 1 0, 1 1, 0 0)")
 out <- geos_points_along_geometry(ring, distance = geos::geos_length(ring))
-expect_identical(
-  geos::geos_write_wkt(out),
-  "MULTIPOINT (0 0)"
-)
+expect_identical(geos::geos_write_wkt(out), "MULTIPOINT (0 0)")
 out <- geos_points_along_geometry(ring, distance = 1, end_offset = 1)
-expect_identical(
-  geos::geos_write_wkt(out),
-  "MULTIPOINT (0 0, 1 0, 1 1)"
-)
+expect_identical(geos::geos_write_wkt(out), "MULTIPOINT (0 0, 1 0, 1 1)")
 
 # multipart reset and ordering -------------------------------------------
 out <- geos_points_along_geometry(
@@ -68,10 +59,7 @@ expect_identical(
 # unsampleable parts warning + empty feature ------------------------------
 expect_warning(
   out <- geos_points_along_geometry(
-    geos::as_geos_geometry(c(
-      "LINESTRING (0 0, 4 0)",
-      "LINESTRING (1 1, 1 1)"
-    )),
+    geos::as_geos_geometry(c("LINESTRING (0 0, 4 0)", "LINESTRING (1 1, 1 1)")),
     distance = 2
   ),
   "unsampleable parts"
@@ -82,24 +70,17 @@ expect_identical(
 )
 
 # unsupported type aborts whole call -------------------------------------
-expect_error(
-  geos_points_along_geometry(
-    geos::as_geos_geometry(c(
-      "LINESTRING (0 0, 1 1)",
-      "POINT (0 0)"
-    )),
-    distance = 1
-  )
-)
+expect_error(geos_points_along_geometry(
+  geos::as_geos_geometry(c("LINESTRING (0 0, 1 1)", "POINT (0 0)")),
+  distance = 1
+))
 
 # nested geometrycollection success --------------------------------------
 out <- geos_points_along_geometry(
-  geos::as_geos_geometry(
-    paste0(
-      "GEOMETRYCOLLECTION (GEOMETRYCOLLECTION (LINESTRING (0 0, 2 0)), ",
-      "LINESTRING (10 0, 12 0))"
-    )
-  ),
+  geos::as_geos_geometry(paste0(
+    "GEOMETRYCOLLECTION (GEOMETRYCOLLECTION (LINESTRING (0 0, 2 0)), ",
+    "LINESTRING (10 0, 12 0))"
+  )),
   distance = 1
 )
 expect_identical(
@@ -132,10 +113,7 @@ expect_warning(
   ),
   "unsampleable parts"
 )
-expect_identical(
-  geos::geos_write_wkt(out),
-  "MULTIPOINT EMPTY"
-)
+expect_identical(geos::geos_write_wkt(out), "MULTIPOINT EMPTY")
 
 # singleton result still MULTIPOINT --------------------------------------
 out <- geos_points_along_geometry(
@@ -144,10 +122,7 @@ out <- geos_points_along_geometry(
   start_offset = 0,
   end_offset = 1
 )
-expect_identical(
-  geos::geos_write_wkt(out),
-  "MULTIPOINT (0 0)"
-)
+expect_identical(geos::geos_write_wkt(out), "MULTIPOINT (0 0)")
 
 # Z preservation regression ----------------------------------------------
 out <- geos_points_along_geometry(
