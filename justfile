@@ -19,3 +19,10 @@ test:
     R CMD build .
     R CMD check --as-cran --no-manual geosx_*.tar.gz
     rm -rf geosx_*.tar.gz geosx.Rcheck
+
+install:
+    #!/usr/bin/env bash
+    rm geosx_*.tar.gz
+    R CMD build .
+    R CMD INSTALL geosx_*.tar.gz
+    rm geosx_*.tar.gz
