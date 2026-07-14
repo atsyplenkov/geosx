@@ -4,7 +4,7 @@
 \alias{geos_segments}
 \title{Split line geometries into segments}
 \usage{
-geos_segments(geom, unique = TRUE)
+geos_segments(geom, unique = TRUE, multi = TRUE)
 }
 \arguments{
 \item{geom}{A \link[geos:as_geos_geometry]{GEOS geometry vector} containing
@@ -13,11 +13,17 @@ only \code{"linestring"} and \code{"multilinestring"} features.}
 \item{unique}{Logical flag. If \code{TRUE} (default), keep the first occurrence
 of each undirected segment key. If \code{FALSE}, return every consecutive
 vertex pair in original order and direction.}
+
+\item{multi}{Logical flag. If \code{TRUE} (default), collect retained segments
+into a single MULTILINESTRING. If \code{FALSE}, return a vector of two-vertex
+LINESTRING features.}
 }
 \value{
-A \link[geos:as_geos_geometry]{GEOS geometry vector} of two-vertex linestrings
-with the same CRS as \code{geom}. Order and direction match the first retained
-occurrence in the input when \code{unique = TRUE}.
+A \link[geos:as_geos_geometry]{GEOS geometry vector} with the same CRS as
+\code{geom}. When \code{multi = TRUE}, a length-1 MULTILINESTRING of the retained
+segments (or \verb{MULTILINESTRING EMPTY} when none remain). When
+\code{multi = FALSE}, a vector of two-vertex linestrings. Order and direction
+match the first retained occurrence in the input when \code{unique = TRUE}.
 }
 \description{
 Flattens each LINESTRING or MULTILINESTRING feature into consecutive
@@ -30,6 +36,6 @@ roads <- geos::as_geos_geometry(c(
   "LINESTRING (3 0, 2 0, 1 0)"
 ))
 geos_segments(roads)
-geos_segments(roads, unique = FALSE)
+geos_segments(roads, unique = FALSE, multi = FALSE)
 
 }

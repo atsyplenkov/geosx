@@ -10,11 +10,16 @@
 #' @param unique Logical flag. If `TRUE` (default), keep the first occurrence
 #'   of each undirected segment key. If `FALSE`, return every consecutive
 #'   vertex pair in original order and direction.
+#' @param multi Logical flag. If `TRUE` (default), collect retained segments
+#'   into a single MULTILINESTRING. If `FALSE`, return a vector of two-vertex
+#'   LINESTRING features.
 #'
 #' @return
-#' A [GEOS geometry vector][geos::as_geos_geometry] of two-vertex linestrings
-#' with the same CRS as `geom`. Order and direction match the first retained
-#' occurrence in the input when `unique = TRUE`.
+#' A [GEOS geometry vector][geos::as_geos_geometry] with the same CRS as
+#' `geom`. When `multi = TRUE`, a length-1 MULTILINESTRING of the retained
+#' segments (or `MULTILINESTRING EMPTY` when none remain). When
+#' `multi = FALSE`, a vector of two-vertex linestrings. Order and direction
+#' match the first retained occurrence in the input when `unique = TRUE`.
 #'
 #' @examples
 #' roads <- geos::as_geos_geometry(c(
@@ -22,15 +27,21 @@
 #'   "LINESTRING (3 0, 2 0, 1 0)"
 #' ))
 #' geos_segments(roads)
-#' geos_segments(roads, unique = FALSE)
+#' geos_segments(roads, unique = FALSE, multi = FALSE)
 #'
 #' @export
-geos_segments <- function(geom, unique = TRUE) {
+geos_segments <- function(geom, unique = TRUE, multi = TRUE) {
   checkmate::assert_class(geom, "geos_geometry")
   checkmate::assert_flag(unique)
+  checkmate::assert_flag(multi)
+
+  crs <- wk::wk_crs(geom)
 
   if (!length(geom)) {
-    return(geom)
+    if (!multi) {
+      return(geom)
+    }
+    return(wk::wk_set_crs(geos::as_geos_geometry("MULTILINESTRING EMPTY"), crs))
   }
 
   checkmate::assert_true(all(
@@ -39,8 +50,15 @@ geos_segments <- function(geom, unique = TRUE) {
 
   coords <- wk::wk_coords(geom)
 
+  empty_result <- function() {
+    if (!multi) {
+      return(geom[FALSE])
+    }
+    wk::wk_set_crs(geos::as_geos_geometry("MULTILINESTRING EMPTY"), crs)
+  }
+
   if (!nrow(coords) || nrow(coords) < 2L) {
-    return(geom[FALSE])
+    return(empty_result())
   }
 
   n <- nrow(coords) - 1L
@@ -49,7 +67,7 @@ geos_segments <- function(geom, unique = TRUE) {
   valid <- same_feature & same_part
 
   if (!any(valid)) {
-    return(geom[FALSE])
+    return(empty_result())
   }
 
   idx <- which(valid)
@@ -87,7 +105,7 @@ geos_segments <- function(geom, unique = TRUE) {
   }
 
   if (!any(keep)) {
-    return(geom[FALSE])
+    return(empty_result())
   }
 
   seg_x <- c(rbind(x1[keep], x2[keep]))
@@ -98,12 +116,18 @@ geos_segments <- function(geom, unique = TRUE) {
     x = seg_x,
     y = seg_y,
     feature_id = rep(seq_len(n_seg), each = 2L),
-    crs = wk::wk_crs(geom)
+    crs = crs
   )
 
   if (has_z) {
     args$z <- c(rbind(z1[keep], z2[keep]))
   }
 
-  do.call(geos::geos_make_linestring, args)
+  segments <- do.call(geos::geos_make_linestring, args)
+
+  if (!multi) {
+    return(segments)
+  }
+
+  geos::geos_make_collection(segments, type_id = "multilinestring")
 }
