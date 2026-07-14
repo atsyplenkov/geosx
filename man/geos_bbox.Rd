@@ -15,7 +15,7 @@ A polygon \link[geos:as_geos_geometry]{GEOS geometry vector}
 \description{
 Returns the bounding box of all geometries in the vector.
 For single geometries, the behavior of \code{geos_bbox} is
-identical to \link[geos:geos_centroid]{geos_envelope}.
+identical to \link[geos:geos_envelope]{geos_envelope}.
 }
 \examples{
 x <- geos::as_geos_geometry(c("POINT (1 2)", "POINT (3 4)"))

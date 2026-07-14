@@ -6,7 +6,6 @@ Description: Collection of common tools for vector geometry operations as an ext
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Depends:
     R (>= 4.1)
 Imports:
@@ -16,3 +15,4 @@ Imports:
 Suggests:
     tinytest,
     sf
+Config/roxygen2/version: 8.0.0
